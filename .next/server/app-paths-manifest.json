@@ -1,0 +1,9 @@
+{
+  "/(DashboardLayout)/dashboards/tournament/[slug]/page": "app/(DashboardLayout)/dashboards/tournament/[slug]/page.js",
+  "/(DashboardLayout)/dashboards/tournaments/page": "app/(DashboardLayout)/dashboards/tournaments/page.js",
+  "/(DashboardLayout)/page": "app/(DashboardLayout)/page.js",
+  "/(DashboardLayout)/dashboards/teams/page": "app/(DashboardLayout)/dashboards/teams/page.js",
+  "/(DashboardLayout)/dashboards/new-tournament/page": "app/(DashboardLayout)/dashboards/new-tournament/page.js",
+  "/(DashboardLayout)/dashboards/settings/page": "app/(DashboardLayout)/dashboards/settings/page.js",
+  "/(DashboardLayout)/dashboards/edit-tournament/[id]/page": "app/(DashboardLayout)/dashboards/edit-tournament/[id]/page.js"
+}
