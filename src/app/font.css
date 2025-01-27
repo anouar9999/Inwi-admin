@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'nightWarrior';
+    src: url('./KnightWarrior-w16n8.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  /* If you have different weights or styles, add them like this: */
+  @font-face {
+    font-family: 'nightWarrior2';
+    src: url('./OnestMedium1602-hint.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+ 
+  @font-face {
+    font-family: 'pilot';
+    src: url('./Montserrat-Medium.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'valorant';
+    src: url('./ValorantFont.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
