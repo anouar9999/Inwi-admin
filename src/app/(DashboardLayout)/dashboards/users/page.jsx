@@ -33,11 +33,11 @@ const UserCard = ({ user, onEdit, onDelete }) => {
       <div className="p-4 flex-col items-center">
         <div className="w-12 h-12 rounded-full overflow-hidden mb-2 flex-shrink-0">
           {avatar ? (
-<<<<<<< HEAD
-            <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${avatar}`} alt={username} className="w-full h-full object-cover" />
-=======
-             <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${avatar}`} alt={username} className="w-full h-full object-cover" />
->>>>>>> 7a251904a296d560f82e3d62ce4e7a82583ed85c
+            <img
+              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${avatar}`}
+              alt={username}
+              className="w-full h-full object-cover"
+            />
           ) : (
             <div className="w-full h-full bg-gray-500 flex items-center justify-center text-white text-xl font-bold">
               {username.charAt(0).toUpperCase()}
@@ -45,7 +45,6 @@ const UserCard = ({ user, onEdit, onDelete }) => {
           )}
         </div>
         <div className="flex-grow min-w-0">
-          
           <h3 className="text-lg font-valorant  text-white truncate" title={username}>
             {username}
           </h3>
@@ -94,7 +93,6 @@ const UserCard = ({ user, onEdit, onDelete }) => {
     </motion.div>
   );
 };
-
 
 // EditUserModal component remains unchanged
 
@@ -158,7 +156,7 @@ const UserManagement = () => {
     try {
       // Add the user ID to the form data
       formData.append('id', editingUser.id);
-  
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/manage_users.php`,
         formData,
@@ -166,9 +164,9 @@ const UserManagement = () => {
           headers: {
             'Content-Type': 'multipart/form-data', // Important for sending files
           },
-        }
+        },
       );
-  
+
       if (response.data.success) {
         await fetchUsers(); // Refresh the users list
         setEditingUser(null);
@@ -220,7 +218,6 @@ const UserManagement = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-    
         <h1 className="font-custom text-white  leading-tight uppercase tracking-wider text-5xl  ">
           User Management
         </h1>
@@ -232,7 +229,6 @@ const UserManagement = () => {
             type="text"
             placeholder="Search users by username or email"
             value={searchTerm}
-           
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full px-4 py-4 angular-cut bg-[#14192D] text-white angular-cut pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />

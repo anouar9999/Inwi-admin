@@ -1,0 +1,6 @@
+{
+  "/not-found": "app/not-found.js",
+  "/auth/auth1/login/page": "app/auth/auth1/login/page.js",
+  "/(DashboardLayout)/dashboards/users/page": "app/(DashboardLayout)/dashboards/users/page.js",
+  "/(DashboardLayout)/page": "app/(DashboardLayout)/page.js"
+}
