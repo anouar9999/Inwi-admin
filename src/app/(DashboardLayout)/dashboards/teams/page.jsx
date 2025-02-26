@@ -168,7 +168,7 @@ const TeamManagement = () => {
 
   if (loading) {
      return (
-       <div className="fixed inset-0 bg-pink-500/20 backdrop-blur-sm flex flex-col items-center justify-center z-50">
+       <div className="fixed inset-0 bg-primary/20 backdrop-blur-sm flex flex-col items-center justify-center z-50">
             <Loader2 className="w-28 h-28 text-white animate-spin" />
             <p className="mt-4 text-5xl font-custom text-white">Loading ...</p>
           </div>

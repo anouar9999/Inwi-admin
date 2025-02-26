@@ -23,7 +23,8 @@ const EditUserModal = ({ isOpen, onClose, user, onSave }) => {
         ...user,
         points: user.points?.toString() || '',
         rank: user.rank?.toString() || '',
-        is_verified: Boolean(user.is_verified)
+        // Convert is_verified to boolean
+        is_verified: user.is_verified === 1 || user.is_verified === '1' || user.is_verified === true
       });
       setNewPassword('');
       setImagePreview(null);
@@ -33,10 +34,18 @@ const EditUserModal = ({ isOpen, onClose, user, onSave }) => {
   const handleChange = useCallback((e) => {
     const { name, value, type } = e.target;
     
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? e.target.checked : value
-    }));
+    if (name === 'is_verified') {
+      // Convert value to boolean for is_verified
+      setFormData(prev => ({
+        ...prev,
+        [name]: value === '1' || value === true || value === 'true'
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: type === 'checkbox' ? e.target.checked : value
+      }));
+    }
   }, []);
 
   const handleImageUpload = useCallback((e) => {
@@ -65,33 +74,35 @@ const EditUserModal = ({ isOpen, onClose, user, onSave }) => {
     }
   }, []);
 
-// In EditUserModal component, update the handleSubmit function:
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+    
+    const submitData = new FormData();
+    
+    // Add basic fields
+    submitData.append('id', formData.id);
+    submitData.append('username', formData.username);
+    submitData.append('email', formData.email);
+    submitData.append('type', formData.type || 'participant');
+    submitData.append('points', formData.points || '0');
+    
+    // Convert boolean to 1/0 for is_verified
+    submitData.append('is_verified', formData.is_verified ? '1' : '0');
+    
+    submitData.append('bio', formData.bio || '');
+    
+    // Only append password if it was changed
+    if (newPassword) {
+      submitData.append('password', newPassword);
+    }
+    
+    // Handle avatar file
+    if (formData.avatar instanceof File) {
+      submitData.append('avatar', formData.avatar);
+    }
 
-const handleSubmit = useCallback((e) => {
-  e.preventDefault();
-  
-  const submitData = new FormData();
-  
-  // Add basic fields
-  submitData.append('id', formData.id); // Make sure we're sending the ID
-  submitData.append('username', formData.username);
-  submitData.append('email', formData.email);
-  submitData.append('type', formData.type || 'participant');
-  submitData.append('points', formData.points || '0');
-  submitData.append('bio', formData.bio || '');
-  
-  // Only append password if it was changed
-  if (newPassword) {
-    submitData.append('password', newPassword);
-  }
-  
-  // Handle avatar file
-  if (formData.avatar instanceof File) {
-    submitData.append('avatar', formData.avatar);
-  }
-
-  onSave(submitData);
-}, [formData, newPassword, onSave]);
+    onSave(submitData);
+  }, [formData, newPassword, onSave]);
 
   const InputField = useCallback(({ icon: Icon, label, name, type = "text", value, onChange, options = null, placeholder = "", disabled = false }) => (
     <div className="space-y-1.5">
@@ -106,16 +117,13 @@ const handleSubmit = useCallback((e) => {
           <select
             id={name}
             name={name}
-            value={value || ''}
+            value={value ? "1" : "0"}
             onChange={onChange}
             disabled={disabled}
             className="w-full pl-10 pr-3 py-2 bg-[#1a202c]/50 border border-gray-800 text-gray-100 rounded-md focus:ring-1 focus:ring-primary focus:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {options.map((opt) => (
-              <option key={opt.value} value={opt.value} className="bg-gray-900">
-                {opt.label}
-              </option>
-            ))}
+            <option value="0" className="bg-gray-900">Not Verified</option>
+            <option value="1" className="bg-gray-900">Verified</option>
           </select>
         ) : (
           <input
@@ -248,10 +256,9 @@ const handleSubmit = useCallback((e) => {
                 ]}
               />
 
+              {/* Password Field */}
               <div className="space-y-1.5">
-                <label className="text-gray-300 text-sm">
-                  New Password
-                </label>
+                <label className="text-gray-300 text-sm">New Password</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
                     <Shield className="h-5 w-5 text-gray-500" />
@@ -280,9 +287,7 @@ const handleSubmit = useCallback((e) => {
 
             {/* Bio Field */}
             <div className="space-y-1.5">
-              <label className="text-gray-300 text-sm">
-                Bio
-              </label>
+              <label className="text-gray-300 text-sm">Bio</label>
               <div className="relative">
                 <div className="absolute top-2.5 left-3">
                   <FileText className="h-5 w-5 text-gray-500" />

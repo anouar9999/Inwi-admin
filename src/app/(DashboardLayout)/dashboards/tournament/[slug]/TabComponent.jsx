@@ -133,7 +133,7 @@ const TabComponent = ({ activeTab, onTabChange, tournament }) => {
       >
         <path
           d="M6 0H87C90.5 0 93.5 1 95.5 3L100 7.5V27.5C100 30 98 32 95.5 32H13C9.5 32 6.5 31 4.5 29L0 24.5V4.5C0 2 2 0 4.5 0H6Z"
-          fill={activeTab === tab ? '#AE2085' : 'transparent'}
+          fill={activeTab === tab ? '#ff3d08' : 'transparent'}
         />
       </svg>
       <button

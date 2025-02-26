@@ -56,7 +56,7 @@ const DEFAULT_IMAGES = {
       <rect x="25" y="65" width="30" height="3" rx="1.5" fill="#6366F1" opacity="0.3"/>
     </svg>
   `)}`,
-}
+};
 const RefusedParticipants = ({ profiles, onReview, onViewDetails }) => (
   <div className="mt-8 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-red-500/20">
     <div className="p-6">
@@ -161,7 +161,6 @@ const ProfileView = ({ tournamentId }) => {
   }, [tournamentId]);
   const [showFilter, setShowFilter] = useState(false);
 
-
   // Add click outside handler
   useEffect(() => {
     const closeFilter = (e) => {
@@ -175,14 +174,14 @@ const ProfileView = ({ tournamentId }) => {
   useEffect(() => {
     fetchProfiles();
   }, [fetchProfiles]);
-// Debounce search query
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setDebouncedSearchQuery(searchQuery);
-  }, 300);
-  
-  return () => clearTimeout(timer);
-}, [searchQuery]);
+  // Debounce search query
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
   const showNotification = useCallback((message, type = 'success') => {
     setNotification({ message, type });
     setTimeout(() => setNotification(null), 3000);
@@ -221,16 +220,16 @@ useEffect(() => {
   const { activeProfiles, refusedProfiles, filteredProfiles } = useMemo(() => {
     // Start with all profiles
     let filtered = [...profiles];
-  
+
     // Filter by status first
     if (filterStatus !== 'all') {
-      filtered = filtered.filter(profile => profile.status === filterStatus);
+      filtered = filtered.filter((profile) => profile.status === filterStatus);
     }
-  
+
     // Apply search if there is a search term
     if (searchQuery.trim()) {
       const term = searchQuery.toLowerCase().trim();
-      filtered = filtered.filter(profile => {
+      filtered = filtered.filter((profile) => {
         if (profile.team_id) {
           // Search in team fields
           return (
@@ -247,11 +246,11 @@ useEffect(() => {
         }
       });
     }
-  
+
     return {
-      activeProfiles: profiles.filter(p => p.status !== 'rejected'),
-      refusedProfiles: profiles.filter(p => p.status === 'rejected'),
-      filteredProfiles: filtered
+      activeProfiles: profiles.filter((p) => p.status !== 'rejected'),
+      refusedProfiles: profiles.filter((p) => p.status === 'rejected'),
+      filteredProfiles: filtered,
     };
   }, [profiles, filterStatus, searchQuery]);
   // Components
@@ -440,68 +439,97 @@ useEffect(() => {
     );
   };
 
- 
   const ProfileModal = () => {
     if (!selectedProfile) return null;
-    
+    console;
     const isTeam = Boolean(selectedProfile.team_name);
-  
+
     // Color scheme configuration
     const colors = {
       background: {
-        primary: 'bg-[#0F1623]',     // Main modal background
-        overlay: 'bg-gray-800/10',    // Card backgrounds
+        primary: 'bg-[#0F1623]', // Main modal background
+        overlay: 'bg-gray-800/10', // Card backgrounds
         backdrop: 'backdrop-blur-md', // Blur effect
       },
       status: {
         success: {
           bg: 'bg-green-500/10',
           text: 'text-green-400',
-          hover: 'hover:bg-green-500/20'
+          hover: 'hover:bg-green-500/20',
         },
         error: {
           bg: 'bg-red-500/10',
           text: 'text-red-400',
-          hover: 'hover:bg-red-500/20'
+          hover: 'hover:bg-red-500/20',
         },
         warning: {
           bg: 'bg-yellow-500/20',
-          text: 'text-yellow-400'
+          text: 'text-yellow-400',
         },
         online: 'bg-green-500',
-        offline: 'bg-gray-500'
+        offline: 'bg-gray-500',
       },
       text: {
         primary: 'text-white',
         secondary: 'text-gray-400',
-        accent: 'text-purple-400'
+        accent: 'text-purple-400',
       },
       border: {
         ring: 'ring-2 ring-gray-700/50',
-        divider: 'border-2 border-gray-900'
-      }
+        divider: 'border-2 border-gray-900',
+      },
     };
-  
+
     const getStats = () => {
       if (isTeam) {
         return [
-          { icon: Trophy, label: 'MMR', value: selectedProfile.mmr || '0', color: colors.status.warning.text },
-          { icon: Percent, label: 'Win Rate', value: `${selectedProfile.win_rate || 0}%`, color: colors.status.success.text },
-          { icon: Users, label: 'Team Size', value: selectedProfile.member_count || 0, color: 'text-blue-400' },
+          {
+            icon: Trophy,
+            label: 'MMR',
+            value: selectedProfile.mmr || '0',
+            color: colors.status.warning.text,
+          },
+          {
+            icon: Percent,
+            label: 'Win Rate',
+            value: `${selectedProfile.win_rate || 0}%`,
+            color: colors.status.success.text,
+          },
+          {
+            icon: Users,
+            label: 'Team Size',
+            value: selectedProfile.member_count || 0,
+            color: 'text-blue-400',
+          },
         ];
       }
       return [
-        { icon: Shield, label: 'Status', value: selectedProfile.is_verified ? 'Verified' : 'Unverified', color: 'text-blue-400' },
-        { icon: Star, label: 'Points', value: selectedProfile.points || '0', color: colors.status.warning.text },
-        { icon: Clock, label: 'Joined', value: new Date(selectedProfile.registration_date).toLocaleDateString(), color: colors.status.success.text },
+        {
+          icon: Shield,
+          label: 'Status',
+          value: selectedProfile.is_verified ? 'Verified' : 'Unverified',
+          color: 'text-blue-400',
+        },
+        {
+          icon: Star,
+          label: 'Points',
+          value: selectedProfile.points || '0',
+          color: colors.status.warning.text,
+        },
+        {
+          icon: Clock,
+          label: 'Joined',
+          value: new Date(selectedProfile.registration_date).toLocaleDateString(),
+          color: colors.status.success.text,
+        },
       ];
     };
-  
+
     return (
       <div className="fixed inset-0 z-50">
         {/* Backdrop with blur */}
         <div className={`fixed inset-0 ${colors.background.backdrop}`} />
-        
+
         {/* Modal content wrapper */}
         <div className="relative h-full overflow-y-auto">
           <div className="min-h-screen w-full py-8">
@@ -512,20 +540,21 @@ useEffect(() => {
                 <div className="relative flex-shrink-0">
                   <div className={`w-24 h-24 rounded-2xl overflow-hidden ${colors.border.ring}`}>
                     <img
-                      src={isTeam 
-                        ? (selectedProfile.team_image 
-                          ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProfile.team_image}` 
-                          : DEFAULT_IMAGES.team)
-                        : (selectedProfile.avatar 
-                          ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProfile.avatar}` 
-                          :  DEFAULT_IMAGES.participant)
+                      src={
+                        isTeam
+                          ? selectedProfile.team_image
+                            ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProfile.team_image}`
+                            : DEFAULT_IMAGES.team
+                          : selectedProfile.avatar
+                          ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedProfile.avatar}`
+                          : DEFAULT_IMAGES.participant
                       }
                       alt={isTeam ? selectedProfile.team_name : selectedProfile.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
-                     
+
                 {/* Profile Info */}
                 <div className=" relative flex-1">
                   <div className="flex items-start justify-between">
@@ -534,30 +563,28 @@ useEffect(() => {
                         {isTeam ? selectedProfile.team_name : selectedProfile.name}
                       </h1>
                       {selectedProfile.status === 'pending' && (
-                      <div className="flex gap-3">
-                        <button
-                          onClick={() => handleStatusUpdate(selectedProfile.id, 'accepted')}
-                          className={`flex items-center gap-2 px-6 py-2 text-lg tracking-wider font-custom ${colors.status.success.bg} ${colors.status.success.hover} ${colors.status.success.text} rounded-lg transition-all`}
-                        >
-                          <Check className="w-5 h-5" />
-                          <span>Accept Team</span>
-                        </button>
-                        <button
-                          onClick={() => handleStatusUpdate(selectedProfile.id, 'rejected')}
-                          className={`flex items-center gap-2 px-6 py-2 text-lg tracking-wider font-custom ${colors.status.error.bg} ${colors.status.error.hover} ${colors.status.error.text} rounded-lg transition-all`}
-                        >
-                          <X className="w-5 h-5" />
-                          <span>Reject Team</span>
-                        </button>
-                      </div>
-                    )}
+                        <div className="flex gap-3">
+                          <button
+                            onClick={() => handleStatusUpdate(selectedProfile.id, 'accepted')}
+                            className={`flex items-center gap-2 px-6 py-2 text-lg tracking-wider font-custom ${colors.status.success.bg} ${colors.status.success.hover} ${colors.status.success.text} rounded-lg transition-all`}
+                          >
+                            <Check className="w-5 h-5" />
+                            <span>Accept Team</span>
+                          </button>
+                          <button
+                            onClick={() => handleStatusUpdate(selectedProfile.id, 'rejected')}
+                            className={`flex items-center gap-2 px-6 py-2 text-lg tracking-wider font-custom ${colors.status.error.bg} ${colors.status.error.hover} ${colors.status.error.text} rounded-lg transition-all`}
+                          >
+                            <X className="w-5 h-5" />
+                            <span>Reject Team</span>
+                          </button>
+                        </div>
+                      )}
                     </div>
-  
+
                     {/* Action Buttons */}
-                    <div className='absolute top-4 right-4 items-end'  >
-                     
-                      </div>
-  
+                    <div className="absolute top-4 right-4 items-end"></div>
+
                     {/* Close Button */}
                     <button
                       onClick={() => setSelectedProfile(null)}
@@ -568,61 +595,84 @@ useEffect(() => {
                   </div>
                 </div>
               </div>
-  
+
               {/* Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-8">
                 {getStats().map((stat, index) => (
-                  <div key={index}
+                  <div
+                    key={index}
                     className={`flex flex-col items-center p-8 ${colors.background.overlay} rounded-xl`}
                   >
                     <stat.icon className={`w-8 h-8 ${stat.color} mb-4`} />
-                    <span className={`text-4xl font-custom tracking-wider ${colors.text.primary} mb-2`}>{stat.value}</span>
-                    <span className={`text-2xl font-valorant  ${colors.text.secondary}`}>{stat.label}</span>
+                    <span
+                      className={`text-4xl font-custom tracking-wider ${colors.text.primary} mb-2`}
+                    >
+                      {stat.value}
+                    </span>
+                    <span className={`text-2xl font-valorant  ${colors.text.secondary}`}>
+                      {stat.label}
+                    </span>
                   </div>
                 ))}
               </div>
-  {/* Description Section (for teams) */}
-  {isTeam && selectedProfile.description && (
+              {/* Description Section (for teams) */}
+              {isTeam && selectedProfile.description && (
                 <div className="mt-8 p-8 bg-gray-900/50 rounded-xl backdrop-blur-sm">
-                  <h3 className="text-2xl tracking-wider font-custom text-white mb-2">About Team</h3>
+                  <h3 className="text-2xl tracking-wider font-custom text-white mb-2">
+                    About Team
+                  </h3>
                   <p className="text-gray-400 font-pilot">{selectedProfile.description}</p>
                 </div>
               )}
               {/* Team Members Section */}
               {isTeam && selectedProfile.members && (
                 <div className="space-y-4 px-8 py-8">
-                  <h2 className={`text-2xl tracking-wider font-custom ${colors.text.primary}`}>Team Members</h2>
+                  <h2 className={`text-2xl tracking-wider font-custom ${colors.text.primary}`}>
+                    Team Members
+                  </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {selectedProfile.members.map((member, index) => (
-                      <div key={index}
+                      <div
+                        key={index}
                         className={`flex items-center gap-4 p-4 ${colors.background.overlay} rounded-xl`}
                       >
                         <div className="relative">
                           <img
-                            src={member.avatar 
-                              ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${member.avatar}` 
-                              : `/api/placeholder/48/48`}
+                            src={
+                              member.avatar
+                                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${member.avatar}`
+                                : `/api/placeholder/48/48`
+                            }
                             alt={member.name}
                             className="w-12 h-12 rounded-xl object-cover"
                           />
                           {member.name === selectedProfile.owner_name && (
-                            <Crown className={`absolute -top-2 -right-2 w-5 h-5 ${colors.status.warning.text}`} />
+                            <Crown
+                              className={`absolute -top-2 -right-2 w-5 h-5 ${colors.status.warning.text}`}
+                            />
                           )}
-                         
                         </div>
-  
+
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className={`font-valorant ${colors.text.primary}`}>{member.name}</span>
+                            <span className={`font-valorant ${colors.text.primary}`}>
+                              {member.name}
+                            </span>
                             {member.name === selectedProfile.owner_name && (
-                              <span className={`px-2 py-0.5 text-xs ${colors.status.warning.bg} ${colors.status.warning.text} rounded`}>
+                              <span
+                                className={`px-2 py-0.5 text-xs ${colors.status.warning.bg} ${colors.status.warning.text} rounded`}
+                              >
                                 Captain
                               </span>
                             )}
                           </div>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className={`text-sm ${colors.text.secondary}`}>{member.role || 'Mid'}</span>
-                            <span className={`text-sm ${colors.text.accent}`}>{member.rank || 'Unranked'}</span>
+                            <span className={`text-sm ${colors.text.secondary}`}>
+                              {member.role || 'Mid'}
+                            </span>
+                            <span className={`text-sm ${colors.text.accent}`}>
+                              {member.rank || 'Unranked'}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -636,7 +686,7 @@ useEffect(() => {
       </div>
     );
   };
-  
+
   if (loading) {
     return <TransparentLoader messages={['Loading Users...']} />;
   }
@@ -647,16 +697,16 @@ useEffect(() => {
       <StatsGrid />
 
       <SearchAndFilterBar
-  searchQuery={searchQuery}
-  setSearchQuery={setSearchQuery}
-  filterStatus={filterStatus}
-  setFilterStatus={setFilterStatus}
-  viewMode={viewMode}
-  setViewMode={setViewMode}
-  profiles={profiles}
-  showFilter={showFilter}
-  setShowFilter={setShowFilter}
-/>
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filterStatus={filterStatus}
+        setFilterStatus={setFilterStatus}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        profiles={profiles}
+        showFilter={showFilter}
+        setShowFilter={setShowFilter}
+      />
       <div
         className={`grid gap-4 ${
           viewMode === 'grid'

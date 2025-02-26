@@ -69,15 +69,15 @@ const LoadingScreen = () => {
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
         <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
       </div>
 
       {/* Content Container */}
       <div className="relative z-10 flex flex-col items-center">
         {/* Logo Section */}
-        <div className="mb-10 opacity-90 hover:opacity-100 transition-opacity duration-300 animate-bounce">
+        <div className="mb-10 opacity-90 hover:opacity-100 transition-opacity duration-300 ">
           <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Logo_inwi.svg/2560px-Logo_inwi.svg.png"
+            src="https://moroccogamingexpo.ma/wp-content/uploads/2024/02/Logo-MGE-2025-white.svg"
             alt="Brand Logo"
             width={350}
             height={100}
@@ -86,7 +86,7 @@ const LoadingScreen = () => {
         </div>
 
         {/* Loading Text */}
-        <div className="text-white font-custom text-2xl tracking-widest uppercase font-light opacity-80">
+        <div className="text-white font-custom text-4xl tracking-widest uppercase font-light opacity-80">
           Loading ...
         </div>
       </div>

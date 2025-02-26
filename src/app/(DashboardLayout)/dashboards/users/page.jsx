@@ -116,6 +116,7 @@ const UserManagement = () => {
       if (response.data.success) {
         setUsers(response.data.users);
         setFilteredUsers(response.data.users);
+        console.log(response.data.users);
       } else {
         setError(response.data.error || 'Failed to fetch users');
       }

@@ -379,7 +379,7 @@ const TournamentCreation = () => {
           </div>
         </form>
       </div>
-    </div>  : <LoadingOverlay/>
+    </div>  : <LoadingOverlay text={"Generating matches..."} />
     }
     </div>
   );

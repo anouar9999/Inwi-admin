@@ -93,7 +93,7 @@ export default function Login() {
       <div className="space-y-4 max-w-xl">
         <div className="mb-6 w-56">
           <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Logo_inwi.svg/2560px-Logo_inwi.svg.png"
+            src="https://moroccogamingexpo.ma/wp-content/uploads/2024/02/Logo-MGE-2025-white.svg"
             alt="Travelzo"
             width={220}
             height={40}
@@ -120,7 +120,7 @@ export default function Login() {
       {/* Logo container - centered on mobile */}
       <div className="md:hidden w-48 mb-12">
         <Image
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Logo_inwi.svg/2560px-Logo_inwi.svg.png"
+          src="https://moroccogamingexpo.ma/wp-content/uploads/2024/02/Logo-MGE-2025-white.svg"
           alt="Travelzo"
           width={220}
           height={40}
