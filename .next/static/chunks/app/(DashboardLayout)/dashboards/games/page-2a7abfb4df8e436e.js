@@ -1,0 +1,21 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[2114],{65531:function(e,t,r){"use strict";r.d(t,{Z:function(){return o}});var l=r(2265);/**
+ * @license lucide-react v0.408.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */let s=e=>e.replace(/([a-z0-9])([A-Z])/g,"$1-$2").toLowerCase(),a=(...e)=>e.filter((e,t,r)=>!!e&&r.indexOf(e)===t).join(" ");/**
+ * @license lucide-react v0.408.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */var i={xmlns:"http://www.w3.org/2000/svg",width:24,height:24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round"};/**
+ * @license lucide-react v0.408.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */let n=(0,l.forwardRef)(({color:e="currentColor",size:t=24,strokeWidth:r=2,absoluteStrokeWidth:s,className:n="",children:o,iconNode:c,...u},d)=>(0,l.createElement)("svg",{ref:d,...i,width:t,height:t,stroke:e,strokeWidth:s?24*Number(r)/Number(t):r,className:a("lucide",n),...u},[...c.map(([e,t])=>(0,l.createElement)(e,t)),...Array.isArray(o)?o:[o]])),o=(e,t)=>{let r=(0,l.forwardRef)(({className:r,...i},o)=>(0,l.createElement)(n,{ref:o,iconNode:t,className:a(`lucide-${s(e)}`,r),...i}));return r.displayName=`${e}`,r}},41827:function(e,t,r){"use strict";r.d(t,{Z:function(){return l}});/**
+ * @license lucide-react v0.408.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */let l=(0,r(65531).Z)("Search",[["circle",{cx:"11",cy:"11",r:"8",key:"4ej97u"}],["path",{d:"m21 21-4.3-4.3",key:"1qie3q"}]])},88637:function(e,t,r){Promise.resolve().then(r.bind(r,7569))},46993:function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),Object.defineProperty(t,"RouterContext",{enumerable:!0,get:function(){return l}});let l=r(21024)._(r(2265)).default.createContext(null)},7569:function(e,t,r){"use strict";r.r(t);var l=r(57437),s=r(2265),a=r(41827),i=r(61396),n=r.n(i);let o=e=>{let{title:t,imageSrc:r,isJoinable:s=!1}=e;return(0,l.jsx)("div",{className:"relative group",children:(0,l.jsx)(n(),{href:"/dashboards/ecommerce",children:(0,l.jsxs)("div",{className:"w-full h-full",children:[(0,l.jsx)("img",{src:r,alt:t,className:"w-full h-full object-cover rounded-lg"}),(0,l.jsx)("div",{className:"absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center",children:(0,l.jsx)("span",{className:"text-white text-lg font-semibold",children:t})})]})})})};t.default=()=>{let[e,t]=(0,s.useState)(""),r=[{id:1,title:"Game 1",imageSrc:"/path/to/image1.jpg"},{id:2,title:"Game 2",imageSrc:"/path/to/image2.jpg"}].filter(t=>t.title.toLowerCase().includes(e.toLowerCase()));return(0,l.jsxs)("div",{className:"p-4",children:[(0,l.jsx)("div",{className:"flex items-center mb-6",children:(0,l.jsxs)("div",{className:"relative flex-1",children:[(0,l.jsx)("input",{type:"text",placeholder:"Search games...",value:e,onChange:e=>t(e.target.value),className:"w-full p-2 pl-10 border rounded-lg"}),(0,l.jsx)(a.Z,{className:"absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"})]})}),(0,l.jsx)("div",{className:"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4",children:r.map(e=>(0,l.jsx)(o,{title:e.title,imageSrc:e.imageSrc},e.id))})]})}},30622:function(e,t,r){"use strict";var l=r(2265),s=Symbol.for("react.element"),a=Symbol.for("react.fragment"),i=Object.prototype.hasOwnProperty,n=l.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,o={key:!0,ref:!0,__self:!0,__source:!0};function c(e,t,r){var l,a={},c=null,u=null;for(l in void 0!==r&&(c=""+r),void 0!==t.key&&(c=""+t.key),void 0!==t.ref&&(u=t.ref),t)i.call(t,l)&&!o.hasOwnProperty(l)&&(a[l]=t[l]);if(e&&e.defaultProps)for(l in t=e.defaultProps)void 0===a[l]&&(a[l]=t[l]);return{$$typeof:s,type:e,key:c,ref:u,props:a,_owner:n.current}}t.Fragment=a,t.jsx=c,t.jsxs=c},57437:function(e,t,r){"use strict";e.exports=r(30622)}},function(e){e.O(0,[1396,2971,4938,1744],function(){return e(e.s=88637)}),_N_E=e.O()}]);

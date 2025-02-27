@@ -10,6 +10,8 @@ import TeamSizeInput from '../../new-tournament/TeamInput'
 import { useToast } from '@/utils/ToastProvider';
 import TransparentLoader from '../../tournament/[slug]/Loader';
 import LoadingOverlay from '../../tournament/[slug]/Loading';
+import CompetitionTypeSelector from './CompetitionType';
+import { competitionTypes } from '@/utils/helpers';
 const ParticipationTypeToggle = ({ value, onChange, disabled }) => {
   const types = [
     { id: 'participant', icon: User, label: 'Participant Individuel' },
@@ -73,17 +75,7 @@ const TournamentEdit = () => {
     image: '',
   });
 
-  const competitionTypes = {
-    valorant: {
-      title: 'Valorant',
-      image:
-        'https://www.riotgames.com/darkroom/1440/8d5c497da1c2eeec8cffa99b01abc64b:5329ca773963a5b739e98e715957ab39/ps-f2p-val-console-launch-16x9.jpg',
-    },
-    freeFire: {
-      title: 'Free Fire',
-      image: 'https://asset-2.tstatic.net/toraja/foto/bank/images/05082023_Free_Fire_2.jpg',
-    },
-  };
+
 
   const statusOptions = ['Ouvert aux inscriptions', 'En cours', 'Terminé', 'Annulé'];
 
@@ -98,6 +90,7 @@ const TournamentEdit = () => {
         }
         const data = await response.json();
         if (data.success) {
+          console.log(data)
           const formattedData = {
             ...data.data,
             start_date: formatDate(data.data.start_date),
@@ -199,48 +192,8 @@ const TournamentEdit = () => {
 
         <div className="space-y-8">
           {/* Competition Type Selection */}
-          <div className="space-y-4">
-            <label className="block text-lg font-semibold">
-              Type de compétition <span className="text-red-500">*</span>
-            </label>
-            <div className="grid grid-cols-2 gap-8">
-              {Object.entries(competitionTypes).map(([type, data]) => (
-                <button
-                  key={type}
-                  type="button"
-                  disabled={true} // Disabled in edit mode
-                  className={`relative h-28 rounded-lg angular-cut overflow-hidden transition-all duration-300 
-                    ${
-                      formData.competition_type === data.title
-                        ? 'scale-[1.02]'
-                        : 'hover:scale-[1.01]'
-                    }
-                    ${true ? 'opacity-50 cursor-not-allowed' : ''}`}
-                >
-                  <div className="absolute inset-0">
-                    <img src={data.image} alt={data.title} className="w-full h-full object-cover" />
-                    <div
-                      className={`absolute inset-0 ${
-                        formData.competition_type === data.title
-                          ? 'bg-gradient-to-b from-black/40 to-blue-900/40'
-                          : 'bg-gradient-to-b from-black/60 to-gray-900/60'
-                      }`}
-                    />
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                    <h3 className="text-xl font-bold text-white">{data.title}</h3>
-                  </div>
-
-                  {formData.competition_type === data.title && (
-                    <div className="absolute top-4 right-4 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                      <Check className="w-5 h-5 text-white" />
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
+          <CompetitionTypeSelector competitionTypes={competitionTypes} selectedType={formData.competition_type}  />
+        
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Information */}
@@ -262,7 +215,7 @@ const TournamentEdit = () => {
               <ParticipationTypeToggle
                 value={formData.participation_type}
                 onChange={handleChange}
-                disabled={true} // Disabled in edit mode
+                disabled={false} // Disabled in edit mode
               />
             </div>
 

@@ -5,6 +5,7 @@ import { X, Edit, Trash2, Eye, EyeOff, Loader2, Search, Users, Shield, Award } f
 import { motion } from 'framer-motion';
 import EditTeamModal from './EditTeamModal';
 import { useToast } from '@/utils/ToastProvider';
+import LoadingScreen from '@/app/loading';
 
 const TeamCard = ({ team, onEdit, onDelete }) => {
   const { name, team_game, total_members, image, owner_username } = team;
@@ -168,10 +169,7 @@ const TeamManagement = () => {
 
   if (loading) {
      return (
-       <div className="fixed inset-0 bg-primary/20 backdrop-blur-sm flex flex-col items-center justify-center z-50">
-            <Loader2 className="w-28 h-28 text-white animate-spin" />
-            <p className="mt-4 text-5xl font-custom text-white">Loading ...</p>
-          </div>
+     <LoadingScreen/>
      );
    }
 

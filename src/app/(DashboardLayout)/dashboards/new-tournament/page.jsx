@@ -8,6 +8,8 @@ import ParticipantInput from './participantInput';
 import TeamSizeInput from './TeamInput';
 import { useToast } from '@/utils/ToastProvider';
 import LoadingOverlay from './Loading';
+import CompetitionTypeSelector from './CompetitionType';
+import { competitionTypes } from '@/utils/helpers';
 
 const ParticipationTypeToggle = ({ value, onChange }) => {
   const types = [
@@ -54,7 +56,7 @@ const TournamentCreation = () => {
 
   const [formData, setFormData] = useState({
     nom_des_qualifications: '',
-    competition_type: 'Valorant',
+    competition_type: '',
     participation_type: 'participant',
     start_date: '',
     end_date: '',
@@ -69,16 +71,7 @@ const TournamentCreation = () => {
     image: null
   });
 
-  const competitionTypes = {
-    valorant: {
-      title: 'Valorant',
-      image: 'https://www.riotgames.com/darkroom/1440/8d5c497da1c2eeec8cffa99b01abc64b:5329ca773963a5b739e98e715957ab39/ps-f2p-val-console-launch-16x9.jpg',
-    },
-    freeFire: {
-      title: 'Free Fire',
-      image: 'https://asset-2.tstatic.net/toraja/foto/bank/images/05082023_Free_Fire_2.jpg',
-    },
-  };
+
 
   const statusOptions = [
     'Ouvert aux inscriptions',
@@ -91,7 +84,7 @@ const TournamentCreation = () => {
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
-    
+    console.log(name)
     if (type === 'file') {
       const file = files[0];
       if (file) {
@@ -121,7 +114,8 @@ const TournamentCreation = () => {
       'nom_des_qualifications',
       'start_date',
       'end_date',
-      'image'
+      'image',
+      "competition_type"
     ];
 
     const emptyFields = requiredFields.filter(field => !formData[field]);
@@ -163,7 +157,6 @@ const TournamentCreation = () => {
           formDataToSend.append(key, value);
         }
       });
-  
       const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
       const response = await fetch(`${apiUrl}/api/new_tournament.php`, {
         method: 'POST',
@@ -185,7 +178,7 @@ const TournamentCreation = () => {
       const data = await response.json();
   
       showToast('Tournoi créé avec succès!', 'success', 1500);
-      setTimeout(() => router.push('/dashboards/tournaments'), 1500);
+      // setTimeout(() => router.push('/dashboards/tournaments'), 1500);
     } catch (error) {
       console.error('Submission error:', error);
       showToast(error.message || 'Une erreur est survenue', 'error', 1500);
@@ -203,7 +196,11 @@ const TournamentCreation = () => {
 
       <div className="space-y-8">
        
-
+      <CompetitionTypeSelector
+  competitionTypes={competitionTypes}
+  selectedType={formData.competition_type}
+  onChange={handleChange}
+/>
         <form onSubmit={handleSubmit} className="space-y-6">
             {/* Tournament Image */}
             {imagePreview && (
